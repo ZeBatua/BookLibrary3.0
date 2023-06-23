@@ -22,7 +22,7 @@ public class Member {
     @Size(min = 2, max = 100, message = "Имя должно содержать от 2 до 100 символов")
     private String name;
 
-    @Column(name = "birthDay")
+    @Column(name = "birthday")
     @Pattern(regexp = "[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}", message = "Используйте формат MM.DD.YYYY")
     private String birthDay;
 
