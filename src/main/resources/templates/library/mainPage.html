@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+</head>
+<body>
+
+<p th:text="${'String value: ' + myString}">VALUE</p>
+
+<a th:href="@{/library/members}">View members</a>
+<br/>
+<a th:href="@{/library/books}">View library</a>
+
+</body>
+</html>

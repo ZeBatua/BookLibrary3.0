@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Member list</title>
+</head>
+<body>
+
+<div th:each="member : ${memberList}">
+  <a th:href="@{/library/members/{id}(id=${member.getId()})}"
+     th:text="${member.getName() + ', ' + member.getBirthDay()}">memberInfo</a>
+</div>
+
+<hr/>
+
+
+<form th:method="GET" th:action="@{/library/members/new}">
+  <input type="submit" value="Добавить пользователя"/>
+</form>
+
+<br/>
+
+<form th:method="GET" th:action="@{/library/books}">
+  <input type="submit" value="Смотреть книги"/>
+</form>
+
+</body>
+</html>
