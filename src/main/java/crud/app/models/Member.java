@@ -30,6 +30,12 @@ public class Member {
     @Email(message = "Используйте стандартные форматы email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "role")
+    private String role;
+
     @OneToMany(mappedBy = "owner")
     List<Book> books;
 
@@ -80,6 +86,22 @@ public class Member {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
