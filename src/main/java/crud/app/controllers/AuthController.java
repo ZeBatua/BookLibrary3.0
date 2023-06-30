@@ -1,6 +1,7 @@
 package crud.app.controllers;
 
 import crud.app.models.Member;
+import crud.app.services.RegistrationService;
 import crud.app.util.MemberValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final MemberValidator memberValidator;
-    private final RegistrationService registrationService; // TODO
+    private final RegistrationService registrationService;
 
     @Autowired
     public AuthController(MemberValidator memberValidator, RegistrationService registrationService) {
