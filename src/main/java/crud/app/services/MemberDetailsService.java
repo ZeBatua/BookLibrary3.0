@@ -2,6 +2,7 @@ package crud.app.services;
 
 import crud.app.models.Member;
 import crud.app.repositories.MemberRepository;
+import crud.app.security.MemberDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,6 +27,6 @@ public class MemberDetailsService implements UserDetailsService {
 
         if (member.isEmpty()) throw new UsernameNotFoundException("User not found");
 
-        return new MemberDetails(member.get()); // TODO
+        return new MemberDetails(member.get());
     }
 }

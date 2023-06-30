@@ -1,5 +1,6 @@
 package crud.app.config;
 
+import crud.app.services.MemberDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final MemberDetailsService memberDetailsService; // TODO
+    private final MemberDetailsService memberDetailsService;
 
     @Autowired
     public SecurityConfig(MemberDetailsService memberDetailsService) {
