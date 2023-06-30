@@ -14,10 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final MemberDetailsServiceImpl memberDetailsService; // TODO
+    private final MemberDetailsService memberDetailsService; // TODO
 
     @Autowired
-    public SecurityConfig(MemberDetailsServiceImpl memberDetailsService) {
+    public SecurityConfig(MemberDetailsService memberDetailsService) {
         this.memberDetailsService = memberDetailsService;
     }
 
