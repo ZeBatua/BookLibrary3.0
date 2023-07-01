@@ -20,8 +20,6 @@ public class BookController {
 
     @Autowired
     public BookController(BookService bookService, MemberService memberService) {
-        System.out.println("hello2");
-
         this.bookService = bookService;
         this.memberService = memberService;
     }
