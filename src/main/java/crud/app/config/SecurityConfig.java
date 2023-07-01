@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -17,10 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MemberDetailsService memberDetailsService;
+    private final CustomAuthenticationSuccessHandler successHandler;
 
     @Autowired
-    public SecurityConfig(MemberDetailsService memberDetailsService) {
+    public SecurityConfig(MemberDetailsService memberDetailsService, CustomAuthenticationSuccessHandler successHandler) {
         this.memberDetailsService = memberDetailsService;
+        this.successHandler = successHandler;
     }
 
     @Override
@@ -36,8 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/library", true)
+//                .defaultSuccessUrl("/library", true)
                 .failureUrl("/auth/login?error")
+                .successHandler(successHandler)
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login");
     }
