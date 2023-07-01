@@ -35,7 +35,10 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MemberDetails personDetails = (MemberDetails) authentication.getPrincipal();
         Member currentMember = personDetails.getMember();
+
+        model.addAttribute("memberInfo", memberService.findOne(currentMember.getId()));
         model.addAttribute("takenBooksList", memberService.getBooksByPersonId(currentMember.getId()));
+        model.addAttribute("freeBooks", bookService.findFreeBooks());
 
         return "library/user/personalAccount";
 
