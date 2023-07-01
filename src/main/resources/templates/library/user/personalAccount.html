@@ -6,7 +6,12 @@
 </head>
 <body>
 
+<p th:text="${'ФИО: ' + memberInfo.getName()}">VALUE</p>
+<p th:text="${'Дата рождения: ' + memberInfo.getBirthDay()}">VALUE</p>
+<p th:text="${'Email: ' + memberInfo.getEmail()}">VALUE</p>
+
 <div th:if="${takenBooksList.isEmpty()}">
+  <hr/>
   <p>Вы не взял ни одной книги</p>
   <hr/>
 </div>
@@ -28,6 +33,31 @@
   <hr/>
 </div>
 </div>
+
+
+<div th:if="${freeBooks.isEmpty()}">
+  <p>Сейчас нет свободных книг</p>
+  <hr/>
+</div>
+
+<div th:if="${!freeBooks.isEmpty()}">
+  <b>Доступные книги:</b>
+  <br/>
+  <table th:each="book : ${freeBooks}">
+    <tr>
+      <td>
+        <span th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"
+              th:style="${book.isExpired()} ? 'color: red' : 'color: black'">
+            book
+        </span>
+      </td>
+    </tr>
+  </table>
+  <hr/>
+</div>
+</div>
+
+
 
 </body>
 </html>
