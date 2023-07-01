@@ -13,7 +13,7 @@ import java.util.List;
 public class Member {
 
     @Id
-    @Column(name = "member_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -111,6 +111,8 @@ public class Member {
                 ", name='" + name + '\'' +
                 ", birthDay='" + birthDay + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

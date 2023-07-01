@@ -32,7 +32,7 @@ public class Book {
     private int year;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
+    @JoinColumn(name = "member_id", referencedColumnName = "id")
     Member owner;
 
     @Column(name = "taken_at")
@@ -117,6 +117,8 @@ public class Book {
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
+                ", takenAt=" + takenAt +
+                ", expired=" + expired +
                 '}';
     }
 }
