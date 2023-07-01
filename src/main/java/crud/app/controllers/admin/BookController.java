@@ -1,4 +1,4 @@
-package crud.app.controllers;
+package crud.app.controllers.admin;
 
 import crud.app.models.Book;
 import crud.app.models.Member;
@@ -6,6 +6,7 @@ import crud.app.services.BookService;
 import crud.app.services.MemberService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/library/books")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class BookController {
 
     private final BookService bookService;
@@ -35,7 +37,7 @@ public class BookController {
         else
             model.addAttribute("bookList", bookService.findWithPagination(page, booksPerPage, sortByYear));
 
-        return "library/book/list";
+        return "library/admin/book/list";
     }
 
     @GetMapping("/{id}")
@@ -50,13 +52,13 @@ public class BookController {
         else
             model.addAttribute("memberList", memberService.findAll());
 
-        return "library/book/info";
+        return "library/admin/book/info";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("book", bookService.findById(id));
-        return "library/book/edit";
+        return "library/admin/book/edit";
     }
 
     @PatchMapping("/{id}")
@@ -65,7 +67,7 @@ public class BookController {
         book.setId(id);
 
         if (bindingResult.hasErrors())
-            return "/library/book/edit";
+            return "/library/admin/book/edit";
 
         bookService.save(book);
         return "redirect:/library/books";
@@ -80,7 +82,7 @@ public class BookController {
     public String create(@ModelAttribute("book") @Valid Book book,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "/library/book/new";
+            return "/library/admin/book/new";
 
         bookService.save(book);
         return "redirect:/library/books";
@@ -106,13 +108,13 @@ public class BookController {
 
     @GetMapping("/search")
     public String searchPage() {
-        return "/library/book/search";
+        return "/library/admin/book/search";
     }
 
     @PostMapping("/search")
     public String makeSearch(Model model, @RequestParam("query") String query) {
         model.addAttribute("books", bookService.searchByName(query));
-        return "library/book/search";
+        return "library/admin/book/search";
     }
 
 }
