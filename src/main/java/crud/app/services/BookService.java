@@ -48,6 +48,10 @@ public class BookService {
         return bookRepository.findByNameStartingWith(query);
     }
 
+    public List<Book> findFreeBooks() {
+        return bookRepository.findByOwnerIsNull();
+    }
+
     @Transactional
     public void save(Book person) {
         bookRepository.save(person);
