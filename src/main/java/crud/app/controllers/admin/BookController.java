@@ -4,15 +4,15 @@ import crud.app.models.Book;
 import crud.app.models.Member;
 import crud.app.services.BookService;
 import crud.app.services.MemberService;
-
-import javax.validation.Valid;
-
+import crud.app.util.BookValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/library/books")
@@ -21,21 +21,22 @@ public class BookController {
 
     private final BookService bookService;
     private final MemberService memberService;
+    private final BookValidator bookValidator;
 
     @Autowired
-    public BookController(BookService bookService, MemberService memberService) {
+    public BookController(BookService bookService, MemberService memberService, BookValidator bookValidator) {
         this.bookService = bookService;
         this.memberService = memberService;
+        this.bookValidator = bookValidator;
     }
 
     @GetMapping()
     public String bookList(Model model, @RequestParam(value = "page", required = false) Integer page,
                            @RequestParam(value = "books_per_page", required = false) Integer booksPerPage,
                            @RequestParam(value = "sort_by_year", required = false) boolean sortByYear) {
-        System.out.println("hello3");
 
         if (page == null || booksPerPage == null)
-            model.addAttribute("bookList", bookService.findAll(sortByYear)); // выдача всех книг
+            model.addAttribute("bookList", bookService.findAll(sortByYear));
         else
             model.addAttribute("bookList", bookService.findWithPagination(page, booksPerPage, sortByYear));
 
@@ -67,6 +68,7 @@ public class BookController {
     public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
                          @PathVariable("id") int id) {
         book.setId(id);
+        bookValidator.validate(book, bindingResult);
 
         if (bindingResult.hasErrors())
             return "/library/admin/book/edit";
@@ -83,6 +85,8 @@ public class BookController {
     @PostMapping()
     public String create(@ModelAttribute("book") @Valid Book book,
                          BindingResult bindingResult) {
+        bookValidator.validate(book, bindingResult);
+
         if (bindingResult.hasErrors())
             return "/library/admin/book/new";
 

@@ -3,15 +3,14 @@ package crud.app.controllers.admin;
 import crud.app.models.Member;
 import crud.app.services.MemberService;
 import crud.app.util.MemberValidator;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/library/members")
@@ -47,18 +46,17 @@ public class MemberController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("member") @Valid Member member, BindingResult bindingResult,
-                         @PathVariable("id") int id) {
+    public String update(@ModelAttribute("member") @Valid Member member, BindingResult bindingResult, @PathVariable("id") int id) {
         Member otherMemberData = memberService.findOne(id);
 
         member.setId(id);
         member.setRole(otherMemberData.getRole());
         member.setPassword(otherMemberData.getPassword());
 
-        if (bindingResult.hasErrors())
-            return "/library/admin/member/edit";
-        System.out.println("hello3");
+        memberValidator.validate(member, bindingResult);
 
+        if (bindingResult.hasErrors()) return "/library/admin/member/edit";
+        System.out.println("hello3");
 
         memberService.save(member);
 
