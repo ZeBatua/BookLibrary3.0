@@ -19,7 +19,7 @@ public class Book {
 
     @Column(name = "name")
     @NotEmpty(message = "Название книги не может быть пустым")
-    @Size(min = 2, max = 100, message = "Навзание должно содержать от 2 до 100 символов")
+    @Size(min = 2, max = 100, message = "Название должно содержать от 2 до 100 символов")
     private String name;
 
     @Column(name = "author")
@@ -42,7 +42,8 @@ public class Book {
     @Transient
     private boolean expired; // Hibernate не будет замечать этого поля, что нам и нужно. По-умолчанию false.
 
-    public Book(){};
+    public Book() {
+    }
 
     public Book(String name, String author, int year) {
         this.name = name;

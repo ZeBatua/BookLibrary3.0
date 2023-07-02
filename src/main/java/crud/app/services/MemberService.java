@@ -66,14 +66,13 @@ public class MemberService {
             // Проверка просроченности книг
             person.get().getBooks().forEach(book -> {
                 long diffInMillis = Math.abs(book.getTakenAt().getTime() - new Date().getTime());
-                // 864000000 милисекунд = 10 суток
+                // 864000000 миллисекунд = 10 суток
                 if (diffInMillis > 864000000)
                     book.setExpired(true); // книга просрочена
             });
 
             return person.get().getBooks();
-        }
-        else {
+        } else {
             return Collections.emptyList();
         }
     }

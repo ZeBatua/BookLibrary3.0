@@ -4,7 +4,9 @@ import crud.app.models.Book;
 import crud.app.models.Member;
 import crud.app.services.BookService;
 import crud.app.services.MemberService;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -28,8 +30,8 @@ public class BookController {
 
     @GetMapping()
     public String bookList(Model model, @RequestParam(value = "page", required = false) Integer page,
-                        @RequestParam(value = "books_per_page", required = false) Integer booksPerPage,
-                        @RequestParam(value = "sort_by_year", required = false) boolean sortByYear) {
+                           @RequestParam(value = "books_per_page", required = false) Integer booksPerPage,
+                           @RequestParam(value = "sort_by_year", required = false) boolean sortByYear) {
         System.out.println("hello3");
 
         if (page == null || booksPerPage == null)

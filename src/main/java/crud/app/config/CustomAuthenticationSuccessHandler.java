@@ -16,13 +16,11 @@ import java.util.Collection;
 
 @Component
 @Configuration
-public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
-{
+public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse, Authentication authentication)
-            throws RuntimeException
-    {
+            throws RuntimeException {
         HttpSession session = httpServletRequest.getSession();
         MemberDetails authUser = (MemberDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         session.setAttribute("username", authUser.getUsername());
