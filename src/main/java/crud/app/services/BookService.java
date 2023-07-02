@@ -52,6 +52,11 @@ public class BookService {
         return bookRepository.findByOwnerIsNull();
     }
 
+    public Optional<Book> findFirstByName(String name) {
+        Optional<Book> foundBook = bookRepository.findFirstByName(name);
+        return foundBook;
+    }
+
     @Transactional
     public void save(Book person) {
         bookRepository.save(person);
