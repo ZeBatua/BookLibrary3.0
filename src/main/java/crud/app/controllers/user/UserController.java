@@ -44,4 +44,20 @@ public class UserController {
 
     }
 
+    @PatchMapping("/assignBook/{id}")
+    public String assign(@PathVariable("id") int id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberDetails personDetails = (MemberDetails) authentication.getPrincipal();
+        Member currentMember = personDetails.getMember();
+
+        bookService.assign(id, currentMember);
+        return "redirect:/user";
+    }
+
+    @PatchMapping("/releaseBook/{id}")
+    public String release(@PathVariable("id") int id) {
+        bookService.release(id);
+        return "redirect:/user";
+    }
+
 }

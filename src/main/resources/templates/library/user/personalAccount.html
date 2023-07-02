@@ -27,12 +27,19 @@
               th:style="${book.isExpired()} ? 'color: red' : 'color: black'">
             book
         </span>
+
+        <form th:method="PATCH" th:action="@{/user/releaseBook/{id}(id=${book.getId()})}">
+          <input type="submit" value="Вернуть"/>
+        </form>
+
       </td>
     </tr>
   </table>
   <hr/>
 </div>
-</div>
+
+
+
 
 
 <div th:if="${freeBooks.isEmpty()}">
@@ -50,14 +57,16 @@
               th:style="${book.isExpired()} ? 'color: red' : 'color: black'">
             book
         </span>
+
+        <form th:method="PATCH" th:action="@{/user/assignBook/{id}(id=${book.getId()})}">
+          <input type="submit" value="Взять книгу"/>
+        </form>
+
       </td>
     </tr>
   </table>
   <hr/>
 </div>
-</div>
-
-
 
 </body>
 </html>
