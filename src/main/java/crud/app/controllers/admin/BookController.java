@@ -75,7 +75,7 @@ public class BookController {
 
     @GetMapping("/new")
     public String newBook(@ModelAttribute("book") Book book) {
-        return "library/book/new";
+        return "library/admin/book/new";
     }
 
     @PostMapping()
