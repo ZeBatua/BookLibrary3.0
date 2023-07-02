@@ -47,12 +47,19 @@ public class MemberController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("member") @Valid Member member, BindingResult bindingResult,
                          @PathVariable("id") int id) {
+        Member otherMemberData = memberService.findOne(id);
+
         member.setId(id);
+        member.setRole(otherMemberData.getRole());
+        member.setPassword(otherMemberData.getPassword());
 
         if (bindingResult.hasErrors())
             return "/library/admin/member/edit";
+        System.out.println("hello3");
+
 
         memberService.save(member);
+
         return "redirect:/library/members";
     }
 
