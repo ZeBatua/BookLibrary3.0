@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/library/members}" th:object="${member}">
+<form th:method="POST" th:action="@{/auth/registration}" th:object="${member}">
     <label for="name">Введите ФИО: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
@@ -22,8 +22,20 @@
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</div>
     <br/>
 
-    <hr/>
-    <input type="submit" value="Добавить!"/>
+    <label for="password">Придумайте пароль: </label>
+    <input type="password" th:field="*{password}" id="password"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+    <br/>
+
+    <label for="role">Выдать роль:</label>
+    <select name="pets" id="role" th:field="*{role}">
+        <option value="ROLE_USER">User</option>
+        <option value="ROLE_ADMIN">Admin</option>
+    </select>
+
+    <br/>
+
+    <input type="submit" value="Sign up!"/>
 </form>
 
 </body>

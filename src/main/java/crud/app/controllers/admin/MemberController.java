@@ -68,18 +68,6 @@ public class MemberController {
         return "library/admin/member/new";
     }
 
-    @PostMapping()
-    public String create(@ModelAttribute("member") @Valid Member member,
-                         BindingResult bindingResult) {
-        memberValidator.validate(member, bindingResult);
-
-        if (bindingResult.hasErrors())
-            return "library/admin/member/new";
-
-        memberService.save(member);
-        return "redirect:/library/members";
-    }
-
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         memberService.delete(id);
